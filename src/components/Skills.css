@@ -1,0 +1,140 @@
+/* ---------- Services / Skills White Section ---------- */
+.services-section {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  padding: 120px 0;
+  z-index: 10;
+  margin-top: -50px; /* overlap with about section */
+  box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.services-container {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.services-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.services-heading {
+  font-size: clamp(3rem, 12vw, 130px);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #0c0c0c;
+  margin: 0;
+  line-height: 1;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Services row layout */
+.services-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.service-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 48px;
+  padding: 40px 0;
+  border-top: 1px solid rgba(12, 12, 12, 0.15);
+  transition: all 0.3s ease;
+}
+
+.service-number {
+  font-size: clamp(2.5rem, 8vw, 100px);
+  font-weight: 900;
+  line-height: 0.75;
+  color: #0c0c0c;
+  font-family: 'Outfit', sans-serif;
+  flex-shrink: 0;
+}
+
+.service-content-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+  padding-top: 8px;
+  cursor: pointer;
+}
+
+.service-title {
+  font-size: clamp(1.2rem, 2.2vw, 1.85rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #0c0c0c;
+  margin: 0;
+  position: relative;
+  width: fit-content;
+  letter-spacing: -0.01em;
+}
+
+/* Hover underline trigger */
+.title-underline {
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 0;
+  background: rgba(12, 12, 12, 0.8);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-content-group:hover .title-underline {
+  width: 100%;
+}
+
+.service-description {
+  font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+  font-weight: 300;
+  line-height: 1.55;
+  color: #0c0c0c;
+  opacity: 0.65;
+  margin: 0;
+  max-width: 720px;
+}
+
+/* ---------- Responsive Adjustments ---------- */
+@media (max-width: 768px) {
+  .services-section {
+    padding: 80px 0;
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
+    margin-top: -35px;
+  }
+  .services-header {
+    margin-bottom: 48px;
+  }
+  .service-row {
+    flex-direction: column;
+    gap: 16px;
+    padding: 32px 0;
+  }
+  .service-content-group {
+    padding-top: 0;
+  }
+  .service-number {
+    line-height: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-container {
+    padding: 0 24px;
+  }
+  .service-row {
+    padding: 24px 0;
+  }
+}

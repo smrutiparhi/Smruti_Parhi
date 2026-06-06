@@ -1,0 +1,213 @@
+/* ---------- Centered minimalistic About Section ---------- */
+.about-section {
+  position: relative;
+  background: #0c0c0c;
+  color: #d7e2ea;
+  min-height: 100vh;
+  padding: 120px 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* Floating Figma-Style Decorative Shapes */
+.float-decor {
+  position: absolute;
+  pointer-events: auto;
+  z-index: 1;
+  user-select: none;
+  cursor: grab;
+}
+
+.float-decor img {
+  width: 100%;
+  height: auto;
+  opacity: 0.8;
+}
+
+.moon-decor {
+  top: 6%;
+  left: 3%;
+  width: clamp(70px, 15vw, 210px);
+}
+
+.p59-decor {
+  bottom: 8%;
+  left: 6%;
+  width: clamp(65px, 13vw, 180px);
+}
+
+.lego-decor {
+  top: 6%;
+  right: 3%;
+  width: clamp(70px, 15vw, 210px);
+}
+
+.group-decor {
+  bottom: 8%;
+  right: 6%;
+  width: clamp(75px, 16vw, 220px);
+}
+
+/* Central Content Container */
+.about-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-header {
+  margin-bottom: 64px;
+}
+
+.about-heading {
+  font-size: clamp(3rem, 12vw, 130px);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-family: 'Outfit', sans-serif;
+  text-align: center;
+}
+
+.about-inner {
+  max-width: 820px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Centered paragraph bio */
+.about-bio {
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.62;
+  color: #d7e2ea;
+  text-align: center;
+  max-width: 680px;
+  margin: 0 0 72px 0;
+}
+
+/* Skills stack list style layout */
+.about-skills-stack {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 72px;
+}
+
+.skills-row {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 28px;
+}
+
+.skills-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: rgba(215, 226, 234, 0.4);
+  width: 176px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.skills-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-item-tag {
+  border-radius: 50px;
+  border: 1px solid rgba(215, 226, 234, 0.12);
+  background: rgba(215, 226, 234, 0.02);
+  padding: 5px 14px;
+  font-size: 0.85rem;
+  color: rgba(215, 226, 234, 0.8);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.skill-item-tag:hover {
+  border-color: rgba(215, 226, 234, 0.4);
+  color: #ffffff;
+}
+
+/* CTA Download Row */
+.about-cta-row {
+  display: flex;
+  justify-content: center;
+}
+
+.about-download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  border: 2px solid #d7e2ea;
+  padding: 12px 36px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #d7e2ea;
+  text-decoration: none;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.about-download-btn:hover {
+  background: rgba(215, 226, 234, 0.08);
+}
+
+/* ---------- Responsive Adjustments ---------- */
+@media (max-width: 992px) {
+  .float-decor {
+    opacity: 0.4; /* dim floating icons on tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .about-section {
+    padding: 80px 0;
+  }
+  .about-bio {
+    margin-bottom: 48px;
+  }
+  .float-decor {
+    display: none; /* hide floating icons on mobile for space */
+  }
+  .skills-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .skills-label {
+    text-align: left;
+    width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-container {
+    padding: 0 24px;
+  }
+  .about-download-btn {
+    padding: 10px 24px;
+    font-size: 0.85rem;
+  }
+}

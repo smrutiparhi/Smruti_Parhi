@@ -1,0 +1,340 @@
+/* ---------- Projects Section (Sticky Stacking Deck) ---------- */
+.projects-section {
+  background: #0C0C0C;
+  color: #D7E2EA;
+  padding: 100px 0 140px 0;
+  position: relative;
+  z-index: 10;
+  overflow: clip;
+}
+
+.projects-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Huge Headline */
+.section-header-huge {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 80px;
+}
+
+.huge-heading {
+  font-size: clamp(4rem, 12vw, 140px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  line-height: 0.85;
+  margin: 0;
+  text-align: center;
+  font-family: 'Outfit', sans-serif;
+  background: linear-gradient(180deg, #d8b4fe 0%, #6366f1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Stacking Deck Container */
+.projects-list-sticky {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 0; /* Stacking cards rely on stickiness & margins */
+  padding-bottom: 100px;
+}
+
+/* Sticky Wrapper for each Card */
+.project-sticky-wrapper {
+  position: sticky;
+  width: 100%;
+  height: 80vh;
+  min-height: 580px;
+  max-height: 720px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+/* Single Card */
+.project-sticky-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 40px;
+  width: 100%;
+  height: 100%;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+/* Card Header */
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.header-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.project-num {
+  font-size: clamp(2.5rem, 8vw, 100px);
+  font-weight: 900;
+  line-height: 0.75;
+  color: var(--text-primary);
+  font-family: 'Outfit', sans-serif;
+  opacity: 0.9;
+}
+
+.project-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: center;
+}
+
+.project-cat {
+  font-size: clamp(0.7rem, 1.1vw, 0.85rem);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(215, 226, 234, 0.5);
+  font-weight: 400;
+}
+
+.project-name {
+  font-size: clamp(1.2rem, 2.2vw, 2rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* Buttons styling */
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #D7E2EA;
+}
+
+.github-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(215, 226, 234, 0.2);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.github-btn:hover {
+  border-color: #ffffff;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.live-btn {
+  padding: 0 20px;
+  height: 48px;
+  border-radius: 30px;
+  border: 1px solid rgba(215, 226, 234, 0.2);
+  background: rgba(255, 255, 255, 0.02);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  gap: 6px;
+}
+
+.live-btn .btn-text {
+  display: inline-block;
+}
+
+.live-btn .arrow-icon {
+  transition: transform 0.3s ease;
+}
+
+.live-btn:hover {
+  background: #ffffff;
+  color: #0C0C0C;
+  border-color: #ffffff;
+}
+
+.live-btn:hover .arrow-icon {
+  transform: translate(2px, -2px);
+}
+
+/* Description Text inside card */
+.card-desc {
+  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+  color: rgba(215, 226, 234, 0.7);
+  line-height: 1.5;
+  margin: 0;
+  max-width: 800px;
+}
+
+/* Triple Image Grid Body */
+.card-grid-body {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+}
+
+.col-40 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 0;
+}
+
+.col-60 {
+  min-height: 0;
+}
+
+.img-wrap-small {
+  overflow: hidden;
+  border-radius: 24px;
+  height: 40%;
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.img-wrap-large {
+  overflow: hidden;
+  border-radius: 24px;
+  height: 60%;
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.img-wrap-full {
+  overflow: hidden;
+  border-radius: 24px;
+  height: 100%;
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.img-wrap-small img,
+.img-wrap-large img,
+.img-wrap-full img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Image Scale Hover Animation */
+.project-sticky-card:hover img {
+  transform: scale(1.04);
+}
+
+/* ---------- Responsive Adjustments ---------- */
+@media (max-width: 992px) {
+  .project-sticky-wrapper {
+    height: 75vh;
+    min-height: 520px;
+  }
+  .img-wrap-small,
+  .img-wrap-large,
+  .img-wrap-full {
+    border-radius: 18px;
+  }
+  .project-sticky-card {
+    border-radius: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-section {
+    padding: 60px 0 80px 0;
+  }
+  .huge-heading {
+    font-size: clamp(3.5rem, 10vw, 90px);
+  }
+  .projects-list-sticky {
+    padding-bottom: 20px;
+  }
+  .project-sticky-wrapper {
+    position: relative;
+    top: 0 !important;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    margin-bottom: 30px;
+  }
+  .project-sticky-card {
+    padding: 24px;
+    height: auto;
+    border-radius: 24px;
+    gap: 16px;
+  }
+  .card-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .live-btn {
+    flex: 1;
+    max-width: 200px;
+  }
+  /* On mobile, collapse grid to single main full screen layout to save aspect ratio */
+  .card-grid-body {
+    grid-template-columns: 1fr;
+    aspect-ratio: 16/10;
+  }
+  .col-40 {
+    display: none; /* Hide col-40 with two stacked images for mobile clarity */
+  }
+  .img-wrap-full {
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-sticky-card {
+    padding: 18px;
+  }
+  .header-info {
+    gap: 16px;
+  }
+  .project-num {
+    font-size: 2.2rem;
+  }
+  .live-btn .btn-text {
+    display: none; /* Hide View Site text on super small screens, show icon only */
+  }
+  .live-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    padding: 0;
+    flex: initial;
+  }
+}

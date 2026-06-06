@@ -1,0 +1,197 @@
+/* ---------- Minimal Grid Get In Touch Section ---------- */
+.contact-section {
+  position: relative;
+  width: 100%;
+  background: #0c0c0c;
+  color: #d7e2ea;
+  padding: 120px 0 60px 0;
+  z-index: 10;
+}
+
+.contact-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-header {
+  margin-bottom: 16px;
+}
+
+.contact-heading {
+  font-size: clamp(3rem, 12vw, 130px);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.contact-sub-header {
+  margin-bottom: 80px;
+}
+
+.contact-subtitle {
+  font-size: clamp(0.85rem, 1.4vw, 1.1rem);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(215, 226, 234, 0.55);
+  margin: 0;
+  text-align: center;
+}
+
+/* Contact cards grid */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 100%;
+  max-width: 1024px;
+  margin-bottom: 120px;
+}
+
+.grid-card-wrapper {
+  display: flex;
+}
+
+.contact-grid-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+  border-radius: 32px;
+  border: 1.5px solid rgba(215, 226, 234, 0.15);
+  background: #141418;
+  padding: 32px;
+  text-decoration: none;
+  width: 100%;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+}
+
+.contact-grid-card:hover {
+  border-color: rgba(215, 226, 234, 0.5);
+  background: #1a1a20;
+  transform: translateY(-4px);
+}
+
+.card-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(215, 226, 234, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d7e2ea;
+  transition: border-color 0.3s ease;
+}
+
+.contact-grid-card:hover .card-icon-circle {
+  border-color: rgba(215, 226, 234, 0.4);
+}
+
+.arrow-up-right-icon {
+  color: rgba(215, 226, 234, 0.3);
+  transition: all 0.3s ease;
+}
+
+.contact-grid-card:hover .arrow-up-right-icon {
+  color: #ffffff;
+  transform: rotate(12deg);
+}
+
+.card-bottom-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.card-label {
+  font-size: clamp(0.7rem, 1.1vw, 0.85rem);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(215, 226, 234, 0.45);
+}
+
+.card-value {
+  font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+  font-weight: 500;
+  color: #d7e2ea;
+  word-break: break-all;
+  transition: color 0.3s ease;
+}
+
+.contact-grid-card:hover .card-value {
+  color: #ffffff;
+}
+
+/* Footer elements styling */
+.contact-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(215, 226, 234, 0.08);
+  padding-top: 32px;
+  width: 100%;
+  max-width: 1024px;
+}
+
+.footer-copyright,
+.footer-designed {
+  font-size: clamp(0.7rem, 1.1vw, 0.85rem);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(215, 226, 234, 0.4);
+}
+
+/* ---------- Responsive Adjustments ---------- */
+@media (max-width: 992px) {
+  .contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 80px;
+  }
+  .contact-grid-card {
+    padding: 24px;
+    gap: 36px;
+    border-radius: 28px;
+  }
+}
+
+@media (max-width: 576px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .contact-footer {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    padding-top: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-container {
+    padding: 0 24px;
+  }
+}
