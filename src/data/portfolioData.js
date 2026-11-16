@@ -12,7 +12,7 @@ export const personalInfo = {
     "Machine Learning Enthusiast",
   ],
   tagline: "Building production-grade, user-facing systems",
-  bio: `Full-Stack Developer specializing in TypeScript, React.js, Node.js, and Express.js, with applied machine learning experience across 8+ shipped projects. I build production-grade, user-facing systems spanning REST APIs, real-time applications, and predictive modeling.`,
+  bio: `Full-Stack Developer specializing in TypeScript, React.js, Node.js, and Express.js, with applied machine learning experience across 8+ shipped projects. I build production-grade, user-facing systems spanning REST APIs, real-time applications, and predictive modeling. Beyond development, I enjoy photography as a creative hobby, occasionally capturing interesting moments, people, and perspectives through my lens.`,
   aboutDetailed: `I work across the full development lifecycle, from responsive interfaces to secure APIs, databases, testing, and deployment. My recent work includes full-stack TypeScript systems, real-time applications, and machine learning products built for practical use cases.
 
         I bring a strong foundation in data structures and algorithms, object-oriented programming, DBMS, and operating systems. I am PCAP-certified in Python and enjoy turning complex requirements into reliable, maintainable software.`,
