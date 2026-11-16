@@ -1,11 +1,14 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { FiArrowUpRight, FiGithub } from 'react-icons/fi';
+import { FiGithub } from 'react-icons/fi';
 import { projects } from '../data/portfolioData';
 import './Projects.css';
+import usePointerDepth from '../hooks/usePointerDepth';
+import ProjectIllustration from './ProjectIllustration';
 
-function ProjectCard({ project, index, total, containerRef }) {
+function ProjectCard({ project, index, total }) {
   const cardRef = useRef(null);
+  const depth = usePointerDepth(6);
   
   // Track scroll progress of the individual card
   const { scrollYProgress } = useScroll({
@@ -23,13 +26,16 @@ function ProjectCard({ project, index, total, containerRef }) {
   return (
     <div
       ref={cardRef}
-      className="project-sticky-wrapper"
+      className="project-sticky-wrapper has-concept"
       style={{
         top: `${topPosition}px`,
       }}
     >
       <motion.article
-        style={{ scale }}
+        style={{ ...depth.style, scale: depth.reducedMotion ? 1 : scale }}
+        onPointerMove={depth.onPointerMove}
+        onPointerLeave={depth.onPointerLeave}
+        onPointerCancel={depth.onPointerCancel}
         className="project-sticky-card"
       >
         {/* Card Header Row */}
@@ -59,40 +65,13 @@ function ProjectCard({ project, index, total, containerRef }) {
         {/* Project Description (Brief summary inside the card) */}
         <p className="card-desc">{project.description}</p>
 
-        {/* Card Body: 3-Image Grid Layout (40% vs 60%) */}
-        <div className="card-grid-body">
-          {/* Column 1 (40%): Two stacked images */}
-          <div className="col-40">
-            <div className="img-wrap-small">
-              <img
-                src={project.col1Image1}
-                alt={`${project.name} preview 1`}
-                loading="lazy"
-                draggable={false}
-              />
-            </div>
-            <div className="img-wrap-large">
-              <img
-                src={project.col1Image2}
-                alt={`${project.name} preview 2`}
-                loading="lazy"
-                draggable={false}
-              />
-            </div>
-          </div>
-          
-          {/* Column 2 (60%): One tall image */}
-          <div className="col-60">
-            <div className="img-wrap-full">
-              <img
-                src={project.col2Image}
-                alt={`${project.name} preview 3`}
-                loading="lazy"
-                draggable={false}
-              />
-            </div>
-          </div>
+        <div className="project-tags" aria-label={`${project.name} technologies`}>
+          {project.tags.map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
         </div>
+
+        <ProjectIllustration project={project} />
       </motion.article>
     </div>
   );
@@ -123,7 +102,6 @@ export default function Projects() {
               project={project}
               index={index}
               total={projects.length}
-              containerRef={containerRef}
             />
           ))}
         </div>

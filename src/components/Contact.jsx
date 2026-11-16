@@ -14,7 +14,7 @@ const contactChannels = [
     icon: FiMessageCircle,
     label: 'WhatsApp',
     value: personalInfo.phone,
-    href: `https://wa.me/91${personalInfo.phone.replace(/[^0-9]/g, '')}`,
+    href: `https://wa.me/${personalInfo.phone.replace(/[^0-9]/g, '')}`,
   },
   {
     icon: FiLinkedin,

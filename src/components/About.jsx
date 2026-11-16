@@ -5,15 +5,14 @@ import { personalInfo } from '../data/portfolioData';
 import './About.css';
 
 const skillList = [
-  { label: 'Languages', items: ['Python', 'JavaScript', 'HTML5', 'CSS3', 'Java', 'C/C++', 'SQL'] },
-  { label: 'Frameworks & Libs', items: ['React.js', 'Node.js', 'Express', 'Tailwind', 'Scikit-learn', 'Pandas', 'NumPy'] },
-  { label: 'Tools & Platforms', items: ['Figma', 'Vercel', 'Git', 'GitHub', 'VS Code', 'Canva', 'Adobe Premiere'] },
-  { label: 'AI & CS Core', items: ['Gemini / OpenAI API', 'Prompt Engineering', 'DSA', 'OOP', 'DBMS', 'Operating Systems'] },
+  { label: 'Languages', items: ['TypeScript', 'JavaScript', 'Python', 'Java', 'C', 'HTML', 'CSS'] },
+  { label: 'Web Stack', items: ['React.js', 'Node.js', 'Express.js', 'REST APIs', 'Tailwind CSS', 'Vite'] },
+  { label: 'Data & Platforms', items: ['PostgreSQL', 'Supabase', 'SQLite', 'WebSockets', 'JWT', 'GitHub Actions'] },
+  { label: 'ML & CS Core', items: ['Scikit-learn', 'Predictive Modeling', 'DSA', 'OOP', 'DBMS', 'Operating Systems'] },
 ];
 
 export default function About() {
   const constraintsRef = useRef(null);
-  const bioText = `Full Stack Web Development Intern at Future Interns and Computer Science student at KL University. I focus on building responsive web systems, machine learning prediction models, and full-stack applications — turning ideas into clean, engaging digital experiences. Let's build something incredible together!`;
 
   return (
     <section className="about-section" id="about" ref={constraintsRef}>
@@ -111,7 +110,7 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="about-bio"
           >
-            {bioText}
+            {personalInfo.bio}
           </motion.p>
 
           {/* Categorized Skills Stack */}
@@ -122,7 +121,7 @@ export default function About() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="about-skills-stack"
           >
-            {skillList.map((skillGroup, idx) => (
+            {skillList.map((skillGroup) => (
               <div key={skillGroup.label} className="skills-row">
                 <span className="skills-label">{skillGroup.label}</span>
                 <div className="skills-items-container">
@@ -147,11 +146,10 @@ export default function About() {
             <a 
               href={personalInfo.resumeUrl} 
               className="about-download-btn" 
-              target="_blank" 
-              rel="noopener noreferrer"
+              download="Smruti_Ranjan_Parhi_Resume.pdf"
             >
               <FiDownload size={18} />
-              <span>Download CV</span>
+              <span>Download Resume</span>
             </a>
           </motion.div>
         </div>

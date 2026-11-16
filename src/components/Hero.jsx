@@ -1,10 +1,11 @@
-import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import usePointerDepth from '../hooks/usePointerDepth';
 import './Hero.css';
 
 const navLinks = [
   { label: 'About', href: '#about' },
-  { label: 'Education', href: '#education' },
+  { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -12,60 +13,31 @@ const navLinks = [
 export default function Hero() {
   const containerRef = useRef(null);
 
-  // Smooth scroll trigger to About section on scroll down/keys
-  useEffect(() => {
-    let scrolled = false;
-
-    const scrollToAbout = () => {
-      if (scrolled) return;
-      scrolled = true;
-      const aboutSection = document.getElementById('about');
-      if (aboutSection) {
-        aboutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    };
-
-    const handleWheel = (e) => {
-      if (!scrolled && e.deltaY > 0 && window.scrollY < 50) {
-        e.preventDefault();
-        scrollToAbout();
-      }
-    };
-
-    const handleKeyDown = (e) => {
-      if (!scrolled && window.scrollY < 50) {
-        if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
-          e.preventDefault();
-          scrollToAbout();
-        }
-      }
-    };
-
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
+  const depth = usePointerDepth(3);
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end start'] });
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
 
   const handleNavClick = (e, href) => {
     e.preventDefault();
     const target = document.querySelector(href);
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      target.scrollIntoView({ behavior: depth.reducedMotion ? 'instant' : 'smooth', block: 'start' });
     }
   };
 
   return (
-    <section ref={containerRef} className="hero-section" id="home">
+    <section ref={containerRef} className="hero-section" id="home"
+      onPointerMove={depth.onPointerMove}
+      onPointerLeave={depth.onPointerLeave}
+      onPointerCancel={depth.onPointerCancel}
+    >
       {/* Fullscreen Background Image */}
-      <img
-        src="/hero_bg.png"
+      <motion.img
+        src="./hero_bg.png"
         alt="Smruti Ranjan Parhi Background"
         className="hero-bg-image"
         draggable={false}
+        style={{ y: depth.reducedMotion ? 0 : backgroundY, scale: 1.04 }}
       />
 
       {/* Background Dimming Overlays */}
@@ -106,7 +78,7 @@ export default function Hero() {
         </motion.header>
 
         {/* Huge Middle Text Area */}
-        <div className="hero-text-area">
+        <motion.div className="hero-text-area" style={depth.style}>
           <motion.p 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -131,9 +103,19 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.75 }}
             className="hero-roles-desc"
           >
-            Developer • Designer • ML Specialist
+            Full-Stack Developer • Software Engineer • ML Enthusiast
           </motion.p>
+        </motion.div>
+      </div>
+      <div className="hero-depth-scene" aria-hidden="true">
+        <div className="hero-orbit" />
+        <div className="hero-orbit hero-orbit-secondary" />
+        <div className="code-cube">
+          {['front', 'back', 'right', 'left', 'top', 'bottom'].map((face, index) => (
+            <span className={`cube-face cube-${face}`} key={face}>{['</>', '{ }', 'TS', 'AI', '01', 'JS'][index]}</span>
+          ))}
         </div>
+        <span className="scene-caption">Ideas into interfaces</span>
       </div>
     </section>
   );

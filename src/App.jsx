@@ -4,9 +4,12 @@ import Skills from './components/Skills';
 import Education from './components/Education';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
+import { MotionConfig } from 'framer-motion';
+import './components/CreativeEffects.css';
 
 function App() {
   return (
+    <MotionConfig reducedMotion="user">
     <main className="relative w-full" style={{ overflowX: 'clip', background: '#0C0C0C' }}>
       <Hero />
       <About />
@@ -15,6 +18,7 @@ function App() {
       <Projects />
       <Contact />
     </main>
+    </MotionConfig>
   );
 }
 

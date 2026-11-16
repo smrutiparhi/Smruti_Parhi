@@ -5,22 +5,22 @@ const servicesList = [
   {
     number: '01',
     title: 'Full-Stack Development',
-    description: 'Building responsive, modern, and performant web applications using React, Node.js, Express, and databases. Deployed seamlessly with pixel-perfect layouts.'
+    description: 'Building production-grade applications with TypeScript, React.js, Node.js, Express.js, PostgreSQL, Supabase, and SQLite.'
   },
   {
     number: '02',
     title: 'AI & ML Engineering',
-    description: 'Developing intelligent classification, predictive, and natural language models using Python, Scikit-learn, and APIs to solve real-world problems.'
+    description: 'Developing predictive models and intelligent workflows with Python, Scikit-learn, data analysis, and safety-constrained LLM integrations.'
   },
   {
     number: '03',
-    title: 'UI/UX Design & Prototyping',
-    description: 'Creating clean, intuitive user interfaces in Figma that prioritize flow, hierarchy, and ease of use, transforming wireframes into delightful products.'
+    title: 'APIs & Real-Time Systems',
+    description: 'Designing RESTful APIs, JWT-secured workflows, and real-time multi-user experiences powered by WebSockets and reliable databases.'
   },
   {
     number: '04',
     title: 'Problem Solving & DSA',
-    description: 'Applying strong algorithmic thinking and data structures (Java, C/C++) to design efficient, scalable, and optimized coding solutions.'
+    description: 'Applying data structures, algorithms, OOP, DBMS, and operating-system fundamentals to create maintainable and efficient software.'
   }
 ];
 
