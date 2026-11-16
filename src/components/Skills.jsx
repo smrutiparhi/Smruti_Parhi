@@ -21,6 +21,11 @@ const servicesList = [
     number: '04',
     title: 'Problem Solving & DSA',
     description: 'Applying data structures, algorithms, OOP, DBMS, and operating-system fundamentals to create maintainable and efficient software.'
+  },
+  {
+    number: '05',
+    title: 'Photography',
+    description: 'Capturing expressive portraits, events, and visual stories with thoughtful composition, natural light, and polished post-production.'
   }
 ];
 
