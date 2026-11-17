@@ -3,48 +3,89 @@ import { motion } from 'framer-motion';
 import { FiArrowLeft, FiArrowRight, FiCamera } from 'react-icons/fi';
 import './Photography.css';
 
-// Replace `src: null` with an imported image or a public image path when the
-// final photographs are ready. The carousel and layout need no other changes.
+const photoAsset = (fileName) => `${import.meta.env.BASE_URL}photography/${fileName}`;
+
 const photoSlides = [
   {
     id: 'photo-01',
-    src: null,
-    alt: 'Photography placeholder one',
+    src: photoAsset('photo-01.jpg'),
+    alt: 'India Gate photographed in warm evening light',
     label: 'Frame 01',
-    title: 'First light',
+    title: 'Monumental light',
+    objectPosition: '50% 55%',
     palette: ['#322659', '#9176d8', '#f4b982', '#121427'],
   },
   {
     id: 'photo-02',
-    src: null,
-    alt: 'Photography placeholder two',
+    src: photoAsset('photo-02.jpg'),
+    alt: 'A bartender performing with fire in a warmly lit bar',
     label: 'Frame 02',
-    title: 'Open skies',
+    title: 'Crafted in flame',
+    objectPosition: '63% 50%',
     palette: ['#1b3957', '#4d8eb5', '#f3c9a1', '#101b2b'],
   },
   {
     id: 'photo-03',
-    src: null,
-    alt: 'Photography placeholder three',
+    src: photoAsset('photo-03.jpg'),
+    alt: 'A copper cocktail cup garnished with mint and dried citrus',
     label: 'Frame 03',
-    title: 'Quiet horizons',
+    title: 'A quiet detail',
+    objectPosition: '50% 54%',
     palette: ['#231948', '#694bb1', '#d5a7ee', '#090916'],
   },
   {
     id: 'photo-04',
-    src: null,
-    alt: 'Photography placeholder four',
+    src: photoAsset('photo-04.jpg'),
+    alt: 'An acrobat balancing beneath illuminated cubes',
     label: 'Frame 04',
-    title: 'After hours',
+    title: 'Balance in motion',
+    objectPosition: '50% 58%',
     palette: ['#271a30', '#81445e', '#e59a78', '#100b18'],
   },
   {
     id: 'photo-05',
-    src: null,
-    alt: 'Photography placeholder five',
+    src: photoAsset('photo-05.jpg'),
+    alt: 'Warm woven lights above a quiet restaurant table',
     label: 'Frame 05',
-    title: 'Details noticed',
+    title: 'Warm corners',
+    objectPosition: '48% 50%',
     palette: ['#173a42', '#3b8888', '#b9d7c9', '#071718'],
+  },
+  {
+    id: 'photo-06',
+    src: photoAsset('photo-06.jpg'),
+    alt: 'A long-exposure portrait of a bartender working with fire',
+    label: 'Frame 06',
+    title: 'Night in motion',
+    objectPosition: '67% 50%',
+    palette: ['#32170f', '#9c4521', '#ffd166', '#090504'],
+  },
+  {
+    id: 'photo-07',
+    src: photoAsset('photo-07.jpg'),
+    alt: 'Two figures silhouetted against shimmering golden water',
+    label: 'Frame 07',
+    title: 'Golden hour',
+    objectPosition: '50% 62%',
+    palette: ['#4c241b', '#b87842', '#ffe0a2', '#1d100d'],
+  },
+  {
+    id: 'photo-08',
+    src: photoAsset('photo-08.jpg'),
+    alt: 'A live performer beneath geometric circus lighting',
+    label: 'Frame 08',
+    title: 'Under the big top',
+    objectPosition: '50% 65%',
+    palette: ['#1f1239', '#7732a8', '#f0a6ff', '#090612'],
+  },
+  {
+    id: 'photo-09',
+    src: photoAsset('photo-09.jpg'),
+    alt: 'A fabric performer moving beneath blue and magenta stage lights',
+    label: 'Frame 09',
+    title: 'A flash of movement',
+    objectPosition: '43% 60%',
+    palette: ['#10115b', '#5334cc', '#ff6edb', '#080716'],
   },
 ];
 
@@ -125,8 +166,8 @@ export default function Photography() {
           </div>
           <h2>Photography</h2>
           <p>
-            A space for the moments, people, and perspectives I occasionally
-            capture through my lens. Original photographs are coming soon.
+            A collection of moments, people, and perspectives I have captured
+            through my lens whenever inspiration strikes.
           </p>
         </motion.div>
 
@@ -170,10 +211,18 @@ export default function Photography() {
                     '--photo-sky-mid': slide.palette[1],
                     '--photo-light': slide.palette[2],
                     '--photo-ground': slide.palette[3],
+                    pointerEvents: isVisible ? 'auto' : 'none',
                   }}
                 >
                   {slide.src ? (
-                    <img src={slide.src} alt={slide.alt} />
+                    <img
+                      src={slide.src}
+                      alt={slide.alt}
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                      decoding="async"
+                      fetchPriority={index === 0 ? 'high' : 'auto'}
+                      style={{ objectPosition: slide.objectPosition }}
+                    />
                   ) : (
                     <div className="photo-placeholder" aria-label={`${slide.label}: photo coming soon`}>
                       <span className="photo-placeholder-sun" />
