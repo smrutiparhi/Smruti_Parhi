@@ -110,7 +110,7 @@ export const projects = [
     title: "AI Recovery Coordinator for Lost or Stolen Phones",
     description:
       "A full-stack TypeScript recovery coordinator with a deterministic 17-input decision engine, dependency-aware actions, and a safety-constrained LLM agent. Built with React, Vite, Tailwind, Node.js, Express, and Supabase Postgres, and verified by 62 integration tests plus 40 engine scenarios.",
-    github: "https://github.com/smrutiparhi",
+    github: "https://github.com/smrutiparhi/FIND_MY_PHONE",
     tags: ["TypeScript", "React", "Express", "Supabase", "LLM Safety"],
     accent: "#8B5CF6",
     featured: true,
@@ -138,7 +138,7 @@ export const projects = [
     title: "Interactive Learning Platform",
     description:
       "A gamified learning platform built with React.js, featuring a responsive user interface and interactive learning modules.",
-    github: "https://github.com/smrutiparhi/arcade-learn",
+    github: "https://github.com/VickyKumarOfficial/Arcade-Learn",
     col1Image1: "./arcade_learn.png",
     col1Image2: "./arcade_learn.png",
     col2Image: "./arcade_learn.png",
@@ -153,7 +153,7 @@ export const projects = [
     title: "Cardiovascular Risk Classification",
     description:
       "A Scikit-learn classification project covering the full machine-learning pipeline from data cleaning and feature selection through model evaluation.",
-    github: "https://github.com/smrutiparhi/heart-disease-prediction",
+    github: "https://github.com/krishn-cc/Heart-Failure-prediction",
     col1Image1: "./heart_disease.png",
     col1Image2: "./heart_disease.png",
     col2Image: "./heart_disease.png",
@@ -168,7 +168,7 @@ export const projects = [
     title: "AI News Summarization",
     description:
       "An AI tool that condenses long-form news articles into a focused 60-second read using LLM-based text processing.",
-    github: "https://github.com/smrutiparhi/news-summarizer",
+    github: "https://github.com/VickyKumarOfficial/Nexity60",
     col1Image1: "./news_summarizer.png",
     col1Image2: "./news_summarizer.png",
     col2Image: "./news_summarizer.png",
@@ -183,7 +183,7 @@ export const projects = [
     title: "Task Management Application",
     description:
       "A full-stack task manager with JWT-secured authentication, complete CRUD workflows, and real-time multi-user synchronization through WebSockets.",
-    github: "https://github.com/smrutiparhi",
+    github: "https://github.com/smrutiparhi/taskflow",
     tags: ["React", "Node.js", "Express", "SQLite", "WebSockets"],
     accent: "#06B6D4",
     featured: true,
@@ -196,7 +196,7 @@ export const projects = [
     title: "E-Commerce Web Application",
     description:
       "A full-stack commerce platform spanning authentication, shopping cart, order management, and an administrative dashboard.",
-    github: "https://github.com/smrutiparhi",
+    github: "https://github.com/smrutiparhi/ShopNest",
     tags: ["React", "Node.js", "Express", "JWT", "SQLite"],
     accent: "#EC4899",
     featured: true,
@@ -209,7 +209,7 @@ export const projects = [
     title: "Full-Stack Blogging Platform",
     description:
       "A blogging platform with live Markdown preview, SQLite-backed engagement tracking, and automated deployment through GitHub Actions.",
-    github: "https://github.com/smrutiparhi",
+    github: "https://github.com/smrutiparhi/Blogosphere",
     tags: ["React", "Markdown", "SQLite", "CI/CD", "GitHub Actions"],
     accent: "#F59E0B",
     featured: true,
