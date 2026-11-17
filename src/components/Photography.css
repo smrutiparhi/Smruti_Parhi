@@ -294,13 +294,15 @@
 .photography-dots {
   display: flex;
   align-items: center;
-  gap: 9px;
+  justify-content: center;
+  gap: 5px;
   padding: 0 4px;
 }
 
 .photography-dots button {
-  width: 8px;
-  height: 8px;
+  flex: 0 0 auto;
+  width: 4px;
+  height: 4px;
   padding: 0;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.24);
@@ -308,7 +310,7 @@
 }
 
 .photography-dots button.is-active {
-  width: 30px;
+  width: 22px;
   background: #a78bfa;
 }
 
@@ -398,12 +400,25 @@
   }
 
   .photography-controls {
-    gap: 14px;
+    gap: 12px;
   }
 
   .photography-controls > button {
     width: 48px;
     height: 48px;
+  }
+
+  .photography-dots {
+    gap: 2.5px;
+  }
+
+  .photography-dots button {
+    width: 3px;
+    height: 3px;
+  }
+
+  .photography-dots button.is-active {
+    width: 14px;
   }
 
   .photography-meta {
