@@ -1,5 +1,6 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
+import { FiMail } from 'react-icons/fi';
 import usePointerDepth from '../hooks/usePointerDepth';
 import './Hero.css';
 
@@ -13,6 +14,7 @@ const navLinks = [
 
 export default function Hero() {
   const containerRef = useRef(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const depth = usePointerDepth(3);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end start'] });
@@ -20,6 +22,7 @@ export default function Hero() {
 
   const handleNavClick = (e, href) => {
     e.preventDefault();
+    setMobileMenuOpen(false);
     const target = document.querySelector(href);
     if (target) {
       target.scrollIntoView({ behavior: depth.reducedMotion ? 'instant' : 'smooth', block: 'start' });
@@ -54,6 +57,14 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="hero-header"
         >
+          <a
+            href="#home"
+            className="hero-mobile-brand"
+            onClick={(e) => handleNavClick(e, '#home')}
+            aria-label="Back to top"
+          >
+            SRP<span>.</span>
+          </a>
           <nav className="hero-nav">
             <ul className="nav-menu">
               {navLinks.map((link) => (
@@ -69,14 +80,58 @@ export default function Hero() {
               ))}
             </ul>
           </nav>
-          <a
-            href="#contact"
-            className="email-me-btn"
-            onClick={(e) => handleNavClick(e, '#contact')}
-          >
-            Email me
-          </a>
+          <div className="hero-header-actions">
+            <a
+              href="#contact"
+              className="email-me-btn"
+              onClick={(e) => handleNavClick(e, '#contact')}
+            >
+              <FiMail aria-hidden="true" />
+              <span>Email me</span>
+            </a>
+            <button
+              type="button"
+              className={`hero-menu-toggle ${mobileMenuOpen ? 'is-open' : ''}`}
+              onClick={() => setMobileMenuOpen((open) => !open)}
+              aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="hero-mobile-menu"
+            >
+              <span />
+              <span />
+            </button>
+          </div>
         </motion.header>
+
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.nav
+              id="hero-mobile-menu"
+              className="hero-mobile-menu"
+              aria-label="Mobile navigation"
+              initial={{ opacity: 0, y: -12, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.98 }}
+              transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <ul>
+                {navLinks.map((link, index) => (
+                  <motion.li
+                    key={link.label}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.035 }}
+                  >
+                    <a href={link.href} onClick={(e) => handleNavClick(e, link.href)}>
+                      <span>{String(index + 1).padStart(2, '0')}</span>
+                      {link.label}
+                    </a>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.nav>
+          )}
+        </AnimatePresence>
 
         {/* Huge Middle Text Area */}
         <motion.div className="hero-text-area" style={depth.style}>
