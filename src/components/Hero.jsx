@@ -159,7 +159,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.75 }}
             className="hero-roles-desc"
           >
-            Full-Stack Developer • Software Engineer • ML Enthusiast
+            Full-Stack Developer • Software Engineer • ML Enthusiast • Photography Enthusiast
           </motion.p>
         </motion.div>
       </div>
