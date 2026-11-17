@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FiArrowLeft, FiArrowRight, FiCamera } from 'react-icons/fi';
 import './Photography.css';
 
@@ -59,9 +59,7 @@ function getCircularOffset(index, activeIndex, total) {
 
 export default function Photography() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const pointerStartX = useRef(null);
-  const prefersReducedMotion = useReducedMotion();
   const slideCount = photoSlides.length;
 
   const showSlide = useCallback((index) => {
@@ -77,11 +75,9 @@ export default function Photography() {
   }, [slideCount]);
 
   useEffect(() => {
-    if (isPaused || prefersReducedMotion) return undefined;
-
     const timer = window.setTimeout(showNext, 2000);
     return () => window.clearTimeout(timer);
-  }, [activeIndex, isPaused, prefersReducedMotion, showNext]);
+  }, [activeIndex, showNext]);
 
   const handleKeyDown = (event) => {
     if (event.key === 'ArrowLeft') {
@@ -141,14 +137,6 @@ export default function Photography() {
           aria-label="Photography gallery"
           tabIndex="0"
           onKeyDown={handleKeyDown}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-          onFocusCapture={() => setIsPaused(true)}
-          onBlurCapture={(event) => {
-            if (!event.currentTarget.contains(event.relatedTarget)) {
-              setIsPaused(false);
-            }
-          }}
           onPointerDown={handlePointerDown}
           onPointerUp={handlePointerUp}
           onPointerCancel={() => { pointerStartX.current = null; }}
@@ -231,7 +219,7 @@ export default function Photography() {
           <div className="photography-meta" aria-live="polite">
             <span>{String(activeIndex + 1).padStart(2, '0')} / {String(slideCount).padStart(2, '0')}</span>
             <span className="photography-meta-separator" aria-hidden="true" />
-            <span>{isPaused ? 'Paused while exploring' : 'Moves every 2 seconds'}</span>
+            <span>Moves every 2 seconds</span>
           </div>
         </motion.div>
       </div>
