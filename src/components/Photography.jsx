@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
-import { FiArrowLeft, FiArrowRight, FiCamera } from 'react-icons/fi';
+import { AnimatePresence, motion } from 'framer-motion';
+import { FiArrowLeft, FiArrowRight, FiCamera, FiGrid, FiLayers, FiX } from 'react-icons/fi';
 import './Photography.css';
 
 const photoAsset = (fileName) => `${import.meta.env.BASE_URL}photography/${fileName}`;
@@ -276,7 +276,24 @@ const photoSlides = [
     objectPosition: '64% 50%',
     palette: ['#281109', '#8d3416', '#ffc35d', '#090403'],
   },
-
+  {
+    id: 'photo-31',
+    src: photoAsset('photo-31.jpg'),
+    alt: 'A concert crowd beneath crossing white beams and a glitch-lit stage',
+    label: 'Frame 31',
+    title: 'Light cuts through',
+    objectPosition: '50% 52%',
+    palette: ['#10212a', '#486d7d', '#e8fbff', '#05090b'],
+  },
+  {
+    id: 'photo-32',
+    src: photoAsset('photo-32.jpg'),
+    alt: 'Three friends silhouetted together against warm concert lights',
+    label: 'Frame 32',
+    title: 'Friends in the glow',
+    objectPosition: '50% 52%',
+    palette: ['#26150c', '#7c4b28', '#ffd189', '#090604'],
+  },
 ];
 
 function getCircularOffset(index, activeIndex, total) {
@@ -290,7 +307,12 @@ function getCircularOffset(index, activeIndex, total) {
 
 export default function Photography() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [viewMode, setViewMode] = useState('showcase');
+  const [lightboxIndex, setLightboxIndex] = useState(null);
   const pointerStartX = useRef(null);
+  const lightboxPointerStartX = useRef(null);
+  const lightboxCloseRef = useRef(null);
+  const lightboxOpenerRef = useRef(null);
   const slideCount = photoSlides.length;
 
   const showSlide = useCallback((index) => {
@@ -306,9 +328,65 @@ export default function Photography() {
   }, [slideCount]);
 
   useEffect(() => {
+    if (viewMode !== 'showcase') return undefined;
+
     const timer = window.setTimeout(showNext, 2000);
     return () => window.clearTimeout(timer);
-  }, [activeIndex, showNext]);
+  }, [activeIndex, showNext, viewMode]);
+
+  const closeLightbox = useCallback(() => {
+    setLightboxIndex(null);
+    window.setTimeout(() => lightboxOpenerRef.current?.focus(), 0);
+  }, []);
+
+  const showLightboxPrevious = useCallback(() => {
+    setLightboxIndex((current) => (current - 1 + slideCount) % slideCount);
+  }, [slideCount]);
+
+  const showLightboxNext = useCallback(() => {
+    setLightboxIndex((current) => (current + 1) % slideCount);
+  }, [slideCount]);
+
+  useEffect(() => {
+    if (lightboxIndex === null) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.requestAnimationFrame(() => lightboxCloseRef.current?.focus());
+
+    const handleLightboxKeyDown = (event) => {
+      if (event.key === 'Escape') closeLightbox();
+      if (event.key === 'ArrowLeft') showLightboxPrevious();
+      if (event.key === 'ArrowRight') showLightboxNext();
+    };
+
+    window.addEventListener('keydown', handleLightboxKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleLightboxKeyDown);
+    };
+  }, [closeLightbox, lightboxIndex, showLightboxNext, showLightboxPrevious]);
+
+  const openLightbox = (index, event) => {
+    lightboxOpenerRef.current = event.currentTarget;
+    setLightboxIndex(index);
+  };
+
+  const handleLightboxPointerDown = (event) => {
+    lightboxPointerStartX.current = event.clientX;
+  };
+
+  const handleLightboxPointerUp = (event) => {
+    if (lightboxPointerStartX.current === null) return;
+
+    const distance = event.clientX - lightboxPointerStartX.current;
+    lightboxPointerStartX.current = null;
+
+    if (Math.abs(distance) < 55) return;
+    if (distance > 0) showLightboxPrevious();
+    else showLightboxNext();
+  };
 
   const handleKeyDown = (event) => {
     if (event.key === 'ArrowLeft') {
@@ -361,9 +439,40 @@ export default function Photography() {
           </p>
         </motion.div>
 
+        <div className="photography-view-switch" role="tablist" aria-label="Photography views">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={viewMode === 'showcase'}
+            aria-controls="photography-showcase-panel"
+            className={viewMode === 'showcase' ? 'is-active' : ''}
+            onClick={() => setViewMode('showcase')}
+          >
+            <FiLayers aria-hidden="true" />
+            <span>Showcase</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={viewMode === 'gallery'}
+            aria-controls="photography-gallery-panel"
+            className={viewMode === 'gallery' ? 'is-active' : ''}
+            onClick={() => setViewMode('gallery')}
+          >
+            <FiGrid aria-hidden="true" />
+            <span>Gallery</span>
+            <span className="photography-view-count">{slideCount}</span>
+          </button>
+        </div>
+
+        <AnimatePresence mode="wait" initial={false}>
+          {viewMode === 'showcase' ? (
+
         <motion.div
+          key="showcase"
+          id="photography-showcase-panel"
           className="photography-carousel"
-          role="region"
+          role="tabpanel"
           aria-roledescription="carousel"
           aria-label="Photography gallery"
           tabIndex="0"
@@ -461,7 +570,126 @@ export default function Photography() {
             <span>Moves every 2 seconds</span>
           </div>
         </motion.div>
+          ) : (
+            <motion.div
+              key="gallery"
+              id="photography-gallery-panel"
+              className="photography-gallery-panel"
+              role="tabpanel"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -18 }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="photography-gallery-intro">
+                <div>
+                  <span>Visual journal</span>
+                  <strong>{String(slideCount).padStart(2, '0')} original photographs</strong>
+                </div>
+                <p>People, performances, places, and small details—arranged as an evolving record of what catches my eye.</p>
+              </div>
+
+              <div className="photography-gallery-grid">
+                {photoSlides.map((slide, index) => (
+                  <button
+                    key={slide.id}
+                    type="button"
+                    className="photography-gallery-item"
+                    onClick={(event) => openLightbox(index, event)}
+                    aria-label={`Open ${slide.title} in full screen`}
+                  >
+                    <img
+                      src={slide.src}
+                      alt={slide.alt}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span className="photography-gallery-number">{String(index + 1).padStart(2, '0')}</span>
+                    <span className="photography-gallery-overlay">
+                      <span>{slide.label}</span>
+                      <strong>{slide.title}</strong>
+                      <em>View photograph</em>
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
       </div>
+      <AnimatePresence>
+        {lightboxIndex !== null && (
+          <motion.div
+            className="photography-lightbox"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Full-screen photograph: ${photoSlides[lightboxIndex].title}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={closeLightbox}
+          >
+            <motion.div
+              className="photography-lightbox-dialog"
+              initial={{ scale: 0.96, y: 18 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.98, y: 12 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(event) => event.stopPropagation()}
+              onPointerDown={handleLightboxPointerDown}
+              onPointerUp={handleLightboxPointerUp}
+              onPointerCancel={() => { lightboxPointerStartX.current = null; }}
+            >
+              <button
+                ref={lightboxCloseRef}
+                type="button"
+                className="photography-lightbox-close"
+                onClick={closeLightbox}
+                aria-label="Close full-screen photograph"
+              >
+                <FiX aria-hidden="true" />
+              </button>
+
+              <button
+                type="button"
+                className="photography-lightbox-nav photography-lightbox-previous"
+                onClick={showLightboxPrevious}
+                aria-label="Show previous photograph"
+              >
+                <FiArrowLeft aria-hidden="true" />
+              </button>
+
+              <figure className="photography-lightbox-figure">
+                <img
+                  key={photoSlides[lightboxIndex].id}
+                  src={photoSlides[lightboxIndex].src}
+                  alt={photoSlides[lightboxIndex].alt}
+                  draggable={false}
+                />
+                <figcaption>
+                  <div>
+                    <span>{photoSlides[lightboxIndex].label}</span>
+                    <strong>{photoSlides[lightboxIndex].title}</strong>
+                  </div>
+                  <span>{String(lightboxIndex + 1).padStart(2, '0')} / {String(slideCount).padStart(2, '0')}</span>
+                </figcaption>
+              </figure>
+
+              <button
+                type="button"
+                className="photography-lightbox-nav photography-lightbox-next"
+                onClick={showLightboxNext}
+                aria-label="Show next photograph"
+              >
+                <FiArrowRight aria-hidden="true" />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </section>
   );
 }
