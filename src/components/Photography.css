@@ -64,10 +64,11 @@
 .photography-heading-wrap h2 {
   margin: 0;
   font-family: 'Outfit', sans-serif;
-  font-size: clamp(4rem, 11vw, 132px);
+  font-size: clamp(3.5rem, 8vw, 112px);
   font-weight: 900;
   line-height: 0.84;
   letter-spacing: -0.055em;
+  white-space: nowrap;
   text-transform: uppercase;
   background: linear-gradient(115deg, #ffffff 8%, #d8b4fe 48%, #818cf8 92%);
   -webkit-background-clip: text;
@@ -746,6 +747,7 @@
     font-size: clamp(2.3rem, 11.5vw, 4.15rem);
     line-height: 0.9;
     letter-spacing: -0.065em;
+    white-space: nowrap;
   }
 
   .photography-heading-wrap p {
