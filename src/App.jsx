@@ -2,6 +2,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
 import Education from './components/Education';
+import Photography from './components/Photography';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import { MotionConfig } from 'framer-motion';
@@ -15,6 +16,7 @@ function App() {
       <About />
       <Skills />
       <Education />
+      <Photography />
       <Projects />
       <Contact />
     </main>
